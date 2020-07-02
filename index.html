@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <title>Proconstru</title>
+<script src = "https://smtpjs.com/v3/smtp.js"></script>
 <link rel="icon" href="img/logotipo3-ConvertImage.jpg" type="image/jpg">
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css"> 
@@ -390,6 +391,25 @@
         <p class="wow fadeInDown delay-09s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
       </div>
     </div>
+	<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </section>
 <!--/Team-->
@@ -439,10 +459,14 @@
         </div>
         <div class="col-lg-8 wow fadeInLeft delay-06s">
           <div class="form">
-            <input class="input-text" type="text" name="" value="Tu Nombre *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
-            <input class="input-text" type="text" name="" value="Tu E-mail *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
-            <textarea class="input-text text-area" cols="0" rows="0" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Tu Mensage *</textarea>
-            <input class="input-btn" type="submit" value="Enviar mensaje">
+		  <form id="form" name="form" method="get" onsubmit="return Envio();" autocomplete="off">
+           <input class="input-text" type="text" name="name"  id="name"  placeholder="Tu Nombre *" required />
+		   <input class="input-text" type="email" name="email" placeholder="Tu Email *" id="email" required />
+           <label for="description">Tu Mensaje:</label>
+		   <textarea class="input-text text-area" name ="description" id="description" cols="0" rows="0"  required /></textarea>
+            <button type="subbmit" class="btn btn-primary btn-lg" value="Enviar mensaje">Enviar mensaje</button>
+			<button type="reset" class="btn btn-danger btn-lg ml-3" value="Cancelar mensaje">Enviar mensaje</button>
+			</form>
           </div>
         </div>
       </div>
@@ -452,6 +476,22 @@
     <div class="footer_bottom"><span>Copyright © 2014,    Template by <a href="http://webthemez.com">WebThemez.com</a>. </span> </div>
   </div>
 </footer>
+<script type="text/javascript">
+
+function Envio(){
+	Email.send({
+		SecureToken: "edb2dca7-521c-4bbd-8d1c-ef30ecfa0f53",
+		To : 'oswaldosoft2003@gmail.com',
+		From : 'oswaldosoft2003@gmail.com',
+		Subject : "Contacto correo de Proconstru",
+		Body : '<br />Nombre del usuario: '+document.getElementById("name").value+' <br />Correo de contacto:  '+document.getElementById("email").value+' <br />Mensaje: '+document.getElementById("description").value+' <br /><br /> Fecha y Hora del envio: '+new Date()
+	}).then(
+	  message => alert("Email enviado de forma exitosa. Gracias por contactarse con nosotros estaremos comunicandonos con usted a la brevedad posible")
+	);
+document.getElementById("form").reset();
+return false;
+}
+</script>
 
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -461,6 +501,5 @@
 <script type="text/javascript" src="js/jquery.isotope.js"></script>
 <script type="text/javascript" src="js/wow.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script>
-
 </body>
 </html>
